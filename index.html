@@ -109,7 +109,7 @@
               <a href="img/CV_Sandro_Breu.pdf" target="_blank" class="btn btn-primary">Download CV</a>
             </div>
 
-            <div class="copyrights">© 2026 All rights reserved.</div>
+            <div class="copyrights">© <script>document.write(new Date().getFullYear())</script> All rights reserved.</div>
 
           </header>
 
@@ -176,8 +176,19 @@
                         <ul>
                           <li>
                             <span class="title">Age</span>
-                            <span class="value">29</span>
+                            <span class="value" id="age"></span>
                           </li>
+                          
+                          <script>
+                            const birth = new Date(1995, 6, 25); // 25.07.1995 (Monat: 0=Jan, 6=Juli)
+                            const today = new Date();
+                          
+                            let age = today.getFullYear() - birth.getFullYear();
+                            const m = today.getMonth() - birth.getMonth();
+                            if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
+                          
+                            document.getElementById('age').textContent = age;
+                          </script>
 
                           <li>
                             <span class="title">Residence</span>
