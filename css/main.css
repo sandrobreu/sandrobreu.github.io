@@ -553,17 +553,17 @@ input[type="submit"]:focus {
 
 .video-container {
   position: relative;
-  overflow: hidden; /* Prevent video overflow */
+  overflow: hidden;
 }
 
 .bg-video {
-  padding-top: 200px;
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: block;
+  position: relative;
   width: 100%;
+  max-height: 55vh;
   object-fit: cover;
-  z-index: -1; /* Place behind content */
+  margin-top: 20px;
+  border-radius: 16px;
 }
 
 
@@ -2902,14 +2902,14 @@ blockquote {
   width: 100%;
 }
 .vcentered .row-home {
-  padding-bottom: 10%;
+  padding-bottom: 0;
   width: 100%;
 }
 
 .title-block {
   position: relative;
   text-align: center;
-  margin-bottom: 30%;
+  margin-bottom: 0;
 }
 
 .title-block h2 {
