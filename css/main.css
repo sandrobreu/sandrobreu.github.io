@@ -125,8 +125,12 @@ p {
   min-height: 80vh;
   margin: 10vh auto;
   padding: 0;
-  background: -webkit-gradient(linear, left top, left bottom, from(#080263), to(#09aeea));
-  background: linear-gradient(#080263, #09aeea);
+  background: -webkit-gradient(linear, left top, left bottom, from(#1D4D59
+  ), to(#51F3EE
+  ));
+  background: linear-gradient(#1D4D59
+  , #51F3EE
+  );
   -webkit-box-shadow: 0 0 100px -5px rgba(0,0,0,.25);
   -moz-box-shadow: 0 0 100px -5px rgba(0,0,0,.25);
   box-shadow: 0 0 100px -5px rgba(0,0,0,.25);
@@ -152,7 +156,7 @@ input[type="submit"],
   line-height: 1.2;
   border: 0;
   outline: 0;
-  border: 2px solid #09aeea;
+  border: 2px solid #28ABC3;
   color: #222;
   text-shadow: none;
   background-color: #f7f7f7;
@@ -183,9 +187,9 @@ input[type="button"]:hover,
 input[type="button"]:focus,
 input[type="submit"]:hover,
 input[type="submit"]:focus {
-  background-color: #09aeea;
+  background-color: #28ABC3;
   color: #fff;
-  border: 2px solid #09aeea;
+  border: 2px solid #28ABC3;
 }
 
 .btn-secondary {
@@ -325,7 +329,7 @@ input[type="submit"]:focus {
   ul.main-menu a.active,
   ul.main-menu a:focus,
   ul.main-menu a:hover {
-    color: #09aeea;
+    color: #28ABC3;
   }
 
   ul.main-menu .menu-icon {
@@ -340,7 +344,7 @@ input[type="submit"]:focus {
     opacity: 0;
     color: #fff;
     padding: 2px 10px;
-    background-color: #09aeea;
+    background-color: #28ABC3;
     white-space: nowrap;
     right: 0;
     top: -50%;
@@ -393,7 +397,7 @@ input[type="submit"]:focus {
 }
 
 .lmpixels-arrows-nav div:hover {
-  color: #09aeea;
+  color: #28ABC3;
 }
 /* --- End LMPixels Arrow Nav --- */
 
@@ -490,7 +494,7 @@ input[type="submit"]:focus {
 
 .header-buttons .btn-primary:hover {
   background-color: #fff;
-  color: #09aeea;
+  color: #28ABC3;
   border-color: #fff;
 }
 
@@ -614,7 +618,7 @@ input[type="submit"]:focus {
 }
 
 .ps:hover>.ps__scrollbar-y-rail:hover>.ps__scrollbar-y {
-    background-color: #09aeea;
+    background-color: #51F3EE;
 }
 
 .ps>.ps__scrollbar-y-rail {
@@ -643,7 +647,7 @@ input[type="submit"]:focus {
 }
 
 .page-title h2 span {
-  color: #09aeea;
+  color: #28ABC3;
 }
 
 .page-title:after {
@@ -654,9 +658,9 @@ input[type="submit"]:focus {
   content: '';
   height: 30px;
   width: 50px;
-  background-image: -webkit-repeating-radial-gradient(center center, #09aeea, #09aeea 1px, transparent 0px, transparent 100%);
-  background-image: -moz-repeating-radial-gradient(center center, #09aeea, #09aeea 1px, transparent 0px, transparent 100%);
-  background-image: -ms-repeating-radial-gradient(center center, #09aeea, #09aeea 1px, transparent 0px, transparent 100%);
+  background-image: -webkit-repeating-radial-gradient(center center, #28ABC3, #28ABC3 1px, transparent 0px, transparent 100%);
+  background-image: -moz-repeating-radial-gradient(center center, #28ABC3, #28ABC3 1px, transparent 0px, transparent 100%);
+  background-image: -ms-repeating-radial-gradient(center center, #28ABC3, #28ABC3 1px, transparent 0px, transparent 100%);
   -webkit-background-size: 6px 6px;
   -moz-background-size: 6px 6px;
   background-size: 6px 6px;
@@ -717,7 +721,7 @@ textarea.form-control, textarea.form-control:focus {
   top: 0;
   opacity: 0;
   background: transparent;
-  border: 2px solid #09aeea;
+  border: 2px solid #28ABC3;
   border-right-width: 0;
   height: 100%;
   -webkit-transition: all 0.3s ease-in-out;
@@ -788,7 +792,7 @@ textarea.form-control, textarea.form-control:focus {
 }
 
 .form-group-with-icon.form-group-focus i {
-  color: #09aeea;
+  color: #28ABC3;
 }
 
 .form-group.form-group-w-checkbox {
@@ -842,7 +846,7 @@ textarea.form-control, textarea.form-control:focus {
 
 .form-group .form-control:focus ~ label,
 .form-group.form-group-focus .form-control ~ label {
-  color: #09aeea;
+  color: #28ABC3;
   top: -20px;
   left: 0;
   z-index: 1;
@@ -877,7 +881,7 @@ textarea.form-control, textarea.form-control:focus {
 }
 
 .block-title h3 span {
-  color: #09aeea;
+  color: #28ABC3;
 }
 
 .block-title:after {
@@ -888,9 +892,9 @@ textarea.form-control, textarea.form-control:focus {
   content: '';
   height: 20px;
   width: 30px;
-  background-image: -webkit-repeating-radial-gradient(center center, #09aeea, #09aeea 1px, transparent 0px, transparent 100%);
-  background-image: -moz-repeating-radial-gradient(center center, #09aeea, #09aeea 1px, transparent 0px, transparent 100%);
-  background-image: -ms-repeating-radial-gradient(center center, #09aeea, #09aeea 1px, transparent 0px, transparent 100%);
+  background-image: -webkit-repeating-radial-gradient(center center, #28ABC3, #28ABC3 1px, transparent 0px, transparent 100%);
+  background-image: -moz-repeating-radial-gradient(center center, #28ABC3, #28ABC3 1px, transparent 0px, transparent 100%);
+  background-image: -ms-repeating-radial-gradient(center center, #28ABC3, #28ABC3 1px, transparent 0px, transparent 100%);
   -webkit-background-size: 6px 6px;
   -moz-background-size: 6px 6px;
   background-size: 6px 6px;
@@ -939,7 +943,7 @@ textarea.form-control, textarea.form-control:focus {
 }
 
 .info-list .title {
-  color: #09aeea;
+  color: #28ABC3;
   margin-right: 5px;
   font-weight: 600;
 }
@@ -967,7 +971,7 @@ textarea.form-control, textarea.form-control:focus {
 .info-block-w-icon i {
   position: relative;
   font-size: 42px;
-  color: #09aeea;
+  color: #28ABC3;
   opacity: .7;
 }
 /* --- End Info block with Icon --- */
@@ -996,7 +1000,7 @@ textarea.form-control, textarea.form-control:focus {
 .lm-info-block i {
   position: relative;
   font-size: 33px;
-  color: #09aeea;
+  color: #28ABC3;
   z-index: 1;
 }
 
@@ -1011,7 +1015,7 @@ textarea.form-control, textarea.form-control:focus {
   font-weight: 400;
   display: block;
   margin: 10px 0;
-  color: #09aeea;
+  color: #28ABC3;
 }
 
 
@@ -1055,7 +1059,7 @@ textarea.form-control, textarea.form-control:focus {
   font-size: 30px;
   right: 0;
   top: 7px;
-  color: #09aeea;
+  color: #28ABC3;
   opacity: .5;
 }
 
@@ -1158,8 +1162,8 @@ textarea.form-control, textarea.form-control:focus {
 .testimonials.owl-carousel .owl-nav .owl-next:hover,
 .clients.owl-carousel .owl-nav .owl-prev:hover,
 .clients.owl-carousel .owl-nav .owl-next:hover {
-    background-color: #09aeea;
-    border-color: #09aeea;
+    background-color: #28ABC3;
+    border-color: #28ABC3;
     color: #fff;
 }
 /* --- End of Sliders Nav --- */
@@ -1220,7 +1224,7 @@ textarea.form-control, textarea.form-control:focus {
   position: absolute;
   margin-left: -8px;
   border-radius: 10px;
-  background-color: #09aeea;
+  background-color: #28ABC3;
   opacity: .25;
   z-index: 0;
 }
@@ -1235,7 +1239,7 @@ textarea.form-control, textarea.form-control:focus {
   margin-left: -4px;
   background-color: #fff;
   border-radius: 5px;
-  border: 2px solid #09aeea;
+  border: 2px solid #28ABC3;
   z-index: 1;
 }
 
@@ -1291,7 +1295,7 @@ textarea.form-control, textarea.form-control:focus {
   position: relative;
   display: inline-block;
   background-color: #fff;
-  border: 1px solid #09aeea;
+  border: 1px solid #28ABC3;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
   border-radius: 8px;
@@ -1306,7 +1310,7 @@ textarea.form-control, textarea.form-control:focus {
 .skills-second-style .skill-container:before {
   content: '';
   position: absolute;
-  background-color: #09aeea;
+  background-color: #28ABC3;
 }
 
 .skills-second-style .skill-value {
@@ -1319,7 +1323,7 @@ textarea.form-control, textarea.form-control:focus {
 }
 
 .skills-second-style .skill-percentage {
-  background-color: #09aeea;
+  background-color: #28ABC3;
   border: 2px solid #fff;
   -moz-border-radius: 9px;
   -webkit-border-radius: 9px;
@@ -1394,7 +1398,7 @@ textarea.form-control, textarea.form-control:focus {
 
 .knowledges li {
   display: inline-block;
-  background-color: #09aeea;
+  background-color: #28ABC3;
   border-radius: 3px;
   color: #fff;
   padding: 1px 10px;
@@ -1882,7 +1886,7 @@ textarea.form-control, textarea.form-control:focus {
 }
 
 .ajax-page-nav > div.nav-item a:hover {
-  background-color: #09aeea;
+  background-color: #28ABC3;
   color: #fff;
 }
 
@@ -1973,8 +1977,8 @@ textarea.form-control, textarea.form-control:focus {
 
 .share-buttons a:hover {
   color: #fff;
-  background-color: #09aeea;
-  border-color: #09aeea;
+  background-color: #28ABC3;
+  border-color: #28ABC3;
 }
 
 .share-buttons a:last-child {
@@ -2306,7 +2310,7 @@ blockquote {
     top: 0;
     right: 0;
     bottom: 0;
-    background-color: #09aeea;
+    background-color: #28ABC3;
     z-index: 99;
     padding: 30px 30px 10px 30px;
     text-align: center;
@@ -2406,7 +2410,7 @@ blockquote {
     height: 48px;
     line-height: 46px;
     text-align: center;
-    background-color: #09aeea;
+    background-color: #28ABC3;
     right: 10px;
     font-size: 19px;
     top: 10px;
@@ -2495,7 +2499,7 @@ blockquote {
     right: 10px;
     bottom: 10px;
     padding: 5px 0;
-    border: 2px solid #09aeea;
+    border: 2px solid #28ABC3;
   }
 
   .lmpixels-arrows-nav div {
@@ -2686,7 +2690,7 @@ blockquote {
   content: '';
   height: 2px;
   margin-top: 0;
-  background-color: #09aeea;
+  background-color: #28ABC3;
   position: absolute;
   left: 0;
   bottom: -3px;
@@ -2827,7 +2831,7 @@ blockquote {
     right: 10px;
     bottom: 10px;
     padding: 5px 0;
-    border: 2px solid #09aeea;
+    border: 2px solid #28ABC3;
   }
 }
 .home-page-first-style {
@@ -2988,7 +2992,7 @@ blockquote {
 .fun-fact i {
   position: relative;
   font-size: 33px;
-  color: #09aeea;
+  color: #28ABC3;
   margin-bottom: 6px;
   width: 33px;
   height: 33px;
@@ -2999,7 +3003,7 @@ blockquote {
   font-weight: 400;
   display: block;
   margin: 10px 0;
-  color: #09aeea;
+  color: #28ABC3;
 }
 
 .fun-fact-block-value {
