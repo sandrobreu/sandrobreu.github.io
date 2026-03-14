@@ -839,26 +839,12 @@
 
                   <div class="row">
                     <div class="col-xs-12 col-sm-12">
-                      <p>Hier findest du alle meine öffentlichen Repositories auf GitHub – von Data Engineering über Machine Learning bis zu experimentellen Side Projects.</p>
+                      <p>Hier findest du meine neuesten 6 öffentlichen GitHub-Repositories – von Data Engineering über Machine Learning bis zu experimentellen Side Projects.</p>
                       <div class="white-space-20"></div>
-                      <div class="blog-masonry one-column clearfix">
-                        <div class="item post-1">
-                          <div class="blog-card">
-                            <div class="media-block">
-                              <div class="category"><a href="https://github.com/sandrobreu?tab=repositories" target="_blank" title="GitHub">GitHub Repositories</a></div>
-                              <a href="https://github.com/sandrobreu?tab=repositories" target="_blank">
-                                <img src="img/github.png" class="size-blog-masonry-image-two-c" alt="Öffentliche GitHub Repositories von Sandro Breu" />
-                                <div class="mask"></div>
-                              </a>
-                            </div>
-                            <div class="post-info">
-                              <a href="https://github.com/sandrobreu?tab=repositories" target="_blank">
-                                <h4 class="blog-item-title">Alle öffentlichen GitHub-Repositories ansehen</h4>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                        <div id="github-projects-grid" class="blog-masonry three-columns clearfix">
+                          <p id="github-projects-status">Lade GitHub-Repositories ...</p>
+                      <div class="white-space-20"></div>
+                      <a href="https://github.com/sandrobreu?tab=repositories" target="_blank" class="btn btn-primary">Alle öffentlichen GitHub-Repositories ansehen</a>
                     </div>
                   </div>
                 </div>
@@ -894,6 +880,61 @@
       const year = today.getFullYear();
       document.getElementById("currentMonthYear").textContent = `${month} ${year}`;
     </script>
+
+    <script>
+      async function loadGitHubProjects() {
+        const container = document.getElementById("github-projects-grid");
+        const status = document.getElementById("github-projects-status");
+
+        if (!container || !status) return;
+
+        try {
+          const response = await fetch("https://api.github.com/users/sandrobreu/repos?sort=updated&per_page=12");
+          if (!response.ok) throw new Error("GitHub API nicht erreichbar");
+
+          const repos = await response.json();
+          const selectedRepos = repos.filter(repo => !repo.fork).slice(0, 6);
+
+          if (!selectedRepos.length) {
+            status.textContent = "Keine öffentlichen Repositories gefunden.";
+            return;
+          }
+
+          container.innerHTML = "";
+
+          selectedRepos.forEach((repo, index) => {
+            const description = repo.description || "Keine Beschreibung verfügbar.";
+
+            const card = document.createElement("div");
+            card.className = `item post-${index + 1}`;
+            card.innerHTML = `
+              <div class="blog-card">
+                <div class="media-block">
+                  <div class="category"><a href="${repo.html_url}" target="_blank" title="${repo.name}">GitHub Repository</a></div>
+                  <a href="${repo.html_url}" target="_blank">
+                    <img src="img/github.png" class="size-blog-masonry-image-two-c" alt="${repo.name}" />
+                    <div class="mask"></div>
+                  </a>
+                </div>
+                <div class="post-info">
+                  <div class="post-date">${repo.language || "Code"} · ★ ${repo.stargazers_count}</div>
+                  <a href="${repo.html_url}" target="_blank">
+                    <h4 class="blog-item-title">${repo.name}</h4>
+                  </a>
+                  <p>${description}</p>
+                </div>
+              </div>
+            `;
+            container.appendChild(card);
+          });
+        } catch (error) {
+          status.textContent = "Repositories konnten aktuell nicht geladen werden. Bitte später erneut versuchen.";
+        }
+      }
+
+      loadGitHubProjects();
+    </script>
+
 
     <script src="js/validator.js"></script>
     <script src="js/main.js"></script>
