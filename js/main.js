@@ -120,6 +120,37 @@
 
     // On Document Load
     $(document).ready(function () {
+        // Portfolio profile updates
+        $('.header-buttons').hide();
+
+        var aboutParagraph = $('section[data-id="about-me"] .col-xs-12.col-sm-7 > p').first();
+        if (aboutParagraph.length) {
+            aboutParagraph.html('I am a Digital Transformation & Data Engineer with a strong background in finance, passionate about emerging technologies such as blockchain and artificial intelligence. In 2026, I completed the MAS in Data Science at ZHAW School of Engineering, strengthening my expertise in Data Science, MLOps, Deep Learning, Reinforcement Learning, and Large Language Models (LLMs).');
+        }
+
+        var experienceTimeline = $('section[data-id="resume"] .timeline.timeline-second-style.clearfix').eq(1);
+        if (experienceTimeline.length) {
+            var firstExperience = experienceTimeline.find('.timeline-item').first();
+            firstExperience.find('.item-period').text('Jan 2020 – Aug 2026');
+
+            if (!$('#unifinanz-experience').length) {
+                experienceTimeline.prepend(`
+                    <div id="unifinanz-experience" class="timeline-item clearfix">
+                      <div class="left-part">
+                        <h5 class="item-period">Sep 2026 – Present</h5>
+                        <span class="item-company"><a href="https://www.unifinanz.li/de/" target="_blank">Unifinanz Trust reg.</a></span>
+                        <span class="item-company">Schaan, Liechtenstein</span>
+                      </div>
+                      <div class="divider"></div>
+                      <div class="right-part">
+                        <h4 class="item-title">Digital Transformation & Data Engineer</h4>
+                        <p>Working on digital transformation and data engineering initiatives, connecting business requirements with modern data, automation, and AI solutions.</p>
+                      </div>
+                    </div>
+                `);
+            }
+        }
+
         var movementStrength = 23;
         var height = movementStrength / $(document).height();
         var width = movementStrength / $(document).width();
