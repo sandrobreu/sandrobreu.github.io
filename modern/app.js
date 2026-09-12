@@ -27,7 +27,7 @@
       'projects.title': 'Projects', 'projects.intro': 'Selected recent public repositories across data engineering, machine learning and technology.', 'projects.loading': 'Loading repositories…', 'projects.all': 'View all repositories ↗',
       'blog.eyebrow': 'Writing', 'blog.title': 'Blog', 'blog.intro': 'Recent articles on data, AI and technology.', 'blog.loading': 'Loading articles…', 'blog.all': 'View all articles ↗',
       'contact.eyebrow': 'Get in touch', 'contact.title': 'Contact', 'contact.intro': 'For professional exchange, collaboration or consulting enquiries, feel free to get in touch.',
-      'contact.profile': 'The easiest way to reach me is via LinkedIn. You can also explore my public work on GitHub.',
+      'contact.email': 'Your email', 'contact.name': 'Your name', 'contact.subject': 'Subject', 'contact.message': 'Message', 'contact.send': 'Send',
       'footer.top': 'Back to top ↑'
     },
     de: {
@@ -51,7 +51,7 @@
       'projects.title': 'Projekte', 'projects.intro': 'Ausgewählte aktuelle öffentliche Repositories aus Data Engineering, Machine Learning und Technologie.', 'projects.loading': 'Repositories werden geladen…', 'projects.all': 'Alle Repositories ansehen ↗',
       'blog.eyebrow': 'Beiträge', 'blog.title': 'Blog', 'blog.intro': 'Aktuelle Beiträge zu Data, AI und Technology.', 'blog.loading': 'Beiträge werden geladen…', 'blog.all': 'Alle Beiträge ansehen ↗',
       'contact.eyebrow': 'Kontakt', 'contact.title': 'Kontakt', 'contact.intro': 'Für fachlichen Austausch, Zusammenarbeit oder Consulting-Anfragen kannst du mich gerne kontaktieren.',
-      'contact.profile': 'Am einfachsten erreichst du mich über LinkedIn. Meine öffentlichen Projekte findest du zusätzlich auf GitHub.',
+      'contact.email': 'E-Mail', 'contact.name': 'Name', 'contact.subject': 'Betreff', 'contact.message': 'Nachricht', 'contact.send': 'Senden',
       'footer.top': 'Nach oben ↑'
     }
   };
