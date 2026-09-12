@@ -83,6 +83,20 @@
   let projectGrid;
   let articleGrid;
 
+  function applyExperienceDetails() {
+    document.querySelectorAll('.timeline-item').forEach(item => {
+      const company = item.querySelector('.timeline-company')?.textContent || '';
+      if (company.includes('Graubündner Kantonalbank')) {
+        const title = item.querySelector('h4');
+        if (title) title.textContent = translations[currentLang]['experience.gkbTitle'];
+      }
+      if (company.includes('Raiffeisen')) {
+        const date = item.querySelector('.timeline-meta');
+        if (date) date.textContent = 'Aug 2011 — Aug 2017';
+      }
+    });
+  }
+
   function applyLanguage(lang) {
     currentLang = translations[lang] ? lang : 'en';
     document.documentElement.lang = currentLang;
@@ -91,6 +105,7 @@
       const value = translations[currentLang][el.dataset.i18n];
       if (value) el.textContent = value;
     });
+    applyExperienceDetails();
     document.querySelectorAll('[data-language]').forEach(button => {
       const active = button.dataset.language === currentLang;
       button.classList.toggle('active', active);
