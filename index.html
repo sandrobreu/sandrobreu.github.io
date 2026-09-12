@@ -307,14 +307,32 @@
           <p class="eyebrow" data-i18n="contact.eyebrow">Get in touch</p>
           <h2 data-i18n="contact.title">Contact</h2>
           <p data-i18n="contact.intro">For professional exchange, collaboration or consulting enquiries, feel free to get in touch.</p>
-        </div>
-        <div class="contact-card contact-profile reveal reveal-delay">
-          <p data-i18n="contact.profile">The easiest way to reach me is via LinkedIn. You can also explore my public work on GitHub.</p>
-          <div class="contact-links contact-links-large">
-            <a class="button button-primary" href="https://www.linkedin.com/in/breusandro/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
-            <a class="button button-ghost" href="https://github.com/sandrobreu" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <div class="contact-links">
+            <a href="https://www.linkedin.com/in/breusandro/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            <a href="https://github.com/sandrobreu" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
           </div>
         </div>
+
+        <form class="contact-card reveal reveal-delay" action="https://formspree.io/f/xgvkyvbe" method="POST">
+          <label>
+            <span data-i18n="contact.email">Your email</span>
+            <input type="email" name="email" autocomplete="email" required>
+          </label>
+          <label>
+            <span data-i18n="contact.name">Your name</span>
+            <input type="text" name="name" autocomplete="name" required>
+          </label>
+          <label>
+            <span data-i18n="contact.subject">Subject</span>
+            <input type="text" name="subject" required>
+          </label>
+          <label>
+            <span data-i18n="contact.message">Message</span>
+            <textarea name="message" rows="6" required></textarea>
+          </label>
+          <div class="g-recaptcha" data-sitekey="6LdqmCAUAAAAAMMNEZvn6g4W5e0or2sZmAVpxVqI" data-theme="dark"></div>
+          <button class="button button-primary" type="submit" data-i18n="contact.send">Send</button>
+        </form>
       </div>
     </section>
   </main>
@@ -326,6 +344,7 @@
     </div>
   </footer>
 
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script src="modern/app.js" defer></script>
 </body>
 </html>
