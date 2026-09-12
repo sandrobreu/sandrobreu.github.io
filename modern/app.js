@@ -114,12 +114,19 @@
       </a>`).join('');
   }
 
+  function resolveImageSource(image) {
+    const source = String(image || 'img/linkedin_2.png').trim();
+    if (/^https?:\/\//i.test(source) || source.startsWith('/')) return source;
+    return `/${source}`;
+  }
+
   function renderArticles(posts) {
     if (!articleGrid || !posts.length) return;
     articleGrid.innerHTML = posts.slice(0, 6).map(post => {
       const date = new Date(`${post.published}T12:00:00`).toLocaleDateString(currentLang === 'de' ? 'de-CH' : 'en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+      const imageSource = resolveImageSource(post.image);
       return `<a class="article-card reveal visible" href="${escapeAttr(post.url)}" target="_blank" rel="noopener noreferrer">
-        <img src="/${escapeAttr(post.image || 'img/linkedin_2.png')}" alt="${escapeAttr(post.title)}" loading="lazy">
+        <img src="${escapeAttr(imageSource)}" alt="${escapeAttr(post.title)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='/img/linkedin_2.png';">
         <div class="article-body"><div class="card-meta"><span>${date}</span><span>LinkedIn ↗</span></div><h3>${escapeHtml(post.title)}</h3><span class="card-link">${currentLang === 'de' ? 'Beitrag lesen ↗' : 'Read article ↗'}</span></div>
       </a>`;
     }).join('');
