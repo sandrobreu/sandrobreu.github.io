@@ -222,6 +222,23 @@ button { color: inherit; }
     transition: max-height .28s ease, opacity .2s ease, padding .28s ease, visibility 0s;
   }
   .mobile-nav a { display: block; padding: 10px 0; color: var(--muted); }
+  .hero-actions .button-primary {
+    background: linear-gradient(135deg, #9FE7C4 0%, #C8F1B9 100%);
+    color: #08130f;
+    box-shadow: 0 10px 30px rgba(159,231,196,.12);
+  }
+  .hero-actions .button-primary:hover {
+    box-shadow: 0 14px 38px rgba(159,231,196,.24);
+  }
+  .hero-actions .button-ghost {
+    background: rgba(159,231,196,.045);
+    border-color: rgba(159,231,196,.28);
+    color: #edf7f1;
+  }
+  .hero-actions .button-ghost:hover {
+    background: rgba(159,231,196,.10);
+    border-color: rgba(159,231,196,.52);
+  }
   .hero-content, .about-layout, .timeline-grid, .contact-layout { grid-template-columns: 1fr; }
   .hero-portrait { justify-self: start; max-width: 340px; }
   .project-grid, .article-grid { grid-template-columns: repeat(2, 1fr); }
