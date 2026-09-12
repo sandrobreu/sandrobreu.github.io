@@ -3096,3 +3096,68 @@ blockquote {
   97% { opacity: 0; } /* Maintain hidden state before next cycle */
   100% { opacity: 0; } /* Reset to initial state */
 }
+
+
+/* Portfolio modernization 2026 */
+.language-toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  margin: 14px 0 4px;
+  font-size: 12px;
+  letter-spacing: .06em;
+}
+
+.language-toggle button {
+  border: 0;
+  padding: 3px 4px;
+  background: transparent;
+  color: inherit;
+  opacity: .55;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+}
+
+.language-toggle button:hover,
+.language-toggle button:focus,
+.language-toggle button.active {
+  opacity: 1;
+}
+
+.language-toggle button.active {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.header-photo picture,
+.header-photo picture img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.skill-domain {
+  margin-bottom: 28px;
+}
+
+.skill-domain .block-title {
+  margin-bottom: 12px;
+}
+
+.skill-tags {
+  margin-top: 0;
+}
+
+.skill-tags li {
+  margin-bottom: 7px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-video,
+  .lm-animated-bg {
+    animation: none !important;
+    transition: none !important;
+  }
+}
