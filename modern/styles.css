@@ -169,6 +169,26 @@ button { color: inherit; }
 /* Content must never depend on JavaScript for visibility. */
 .reveal, .reveal.visible { opacity: 1; transform: none; }
 
+@media (min-width: 981px) {
+  .hero-actions .button-primary {
+    background: linear-gradient(135deg, #9FE7C4 0%, #C8F1B9 100%);
+    color: #08130f;
+    box-shadow: 0 10px 30px rgba(159,231,196,.12);
+  }
+  .hero-actions .button-primary:hover {
+    box-shadow: 0 14px 38px rgba(159,231,196,.24);
+  }
+  .hero-actions .button-ghost {
+    background: rgba(159,231,196,.045);
+    border-color: rgba(159,231,196,.28);
+    color: #edf7f1;
+  }
+  .hero-actions .button-ghost:hover {
+    background: rgba(159,231,196,.10);
+    border-color: rgba(159,231,196,.52);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
   .hero-video { display: none; }
