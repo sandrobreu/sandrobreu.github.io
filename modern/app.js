@@ -5,6 +5,26 @@
   // JavaScript feature or remote request fails.
   document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
 
+  const brandMark = document.querySelector('.brand-mark');
+  if (brandMark) {
+    brandMark.textContent = '';
+    brandMark.style.padding = '0';
+    brandMark.style.overflow = 'hidden';
+    brandMark.style.background = 'none';
+    brandMark.style.border = '1px solid rgba(255,255,255,.14)';
+
+    const profileImage = document.createElement('img');
+    profileImage.src = 'img/main_photo.webp';
+    profileImage.alt = 'Sandro Breu';
+    profileImage.width = 42;
+    profileImage.height = 42;
+    profileImage.style.width = '100%';
+    profileImage.style.height = '100%';
+    profileImage.style.objectFit = 'cover';
+    profileImage.style.display = 'block';
+    brandMark.appendChild(profileImage);
+  }
+
   const translations = {
     en: {
       'nav.about': 'About', 'nav.experience': 'Experience', 'nav.skills': 'Skills', 'nav.projects': 'Projects', 'nav.blog': 'Blog', 'nav.contact': 'Contact',
