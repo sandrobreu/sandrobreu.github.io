@@ -1,6 +1,10 @@
 (() => {
   'use strict';
 
+  // Progressive enhancement: content must remain visible even if a later
+  // JavaScript feature or remote request fails.
+  document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+
   const translations = {
     en: {
       'nav.about': 'About', 'nav.experience': 'Experience', 'nav.skills': 'Skills', 'nav.projects': 'Projects', 'nav.blog': 'Blog', 'nav.contact': 'Contact',
@@ -54,6 +58,8 @@
 
   const getLang = () => localStorage.getItem('modernSiteLanguage') || ((navigator.language || '').toLowerCase().startsWith('de') ? 'de' : 'en');
   let currentLang = getLang();
+  let projectGrid;
+  let articleGrid;
 
   function applyLanguage(lang) {
     currentLang = translations[lang] ? lang : 'en';
@@ -83,30 +89,20 @@
   const menuButton = document.querySelector('[data-menu-button]');
   const mobileNav = document.querySelector('[data-mobile-nav]');
   menuButton?.addEventListener('click', () => {
-    const open = mobileNav.classList.toggle('open');
-    menuButton.setAttribute('aria-expanded', String(open));
+    const open = mobileNav?.classList.toggle('open');
+    menuButton.setAttribute('aria-expanded', String(Boolean(open)));
   });
   mobileNav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
     mobileNav.classList.remove('open');
-    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton?.setAttribute('aria-expanded', 'false');
   }));
 
   const currentYear = document.querySelector('[data-current-year]');
   if (currentYear) currentYear.textContent = new Date().getFullYear();
 
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    }), { threshold: .14 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  } else {
-    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-  }
+  projectGrid = document.querySelector('[data-project-grid]');
+  articleGrid = document.querySelector('[data-article-grid]');
 
-  const projectGrid = document.querySelector('[data-project-grid]');
   function renderProjects(repos) {
     if (!projectGrid || !repos.length) return;
     projectGrid.innerHTML = repos.map(repo => `
@@ -118,17 +114,6 @@
       </a>`).join('');
   }
 
-  fetch('https://api.github.com/users/sandrobreu/repos?sort=updated&per_page=12')
-    .then(r => r.ok ? r.json() : Promise.reject())
-    .then(repos => {
-      window.__projects = repos.filter(repo => !repo.fork).slice(0, 6);
-      renderProjects(window.__projects);
-    })
-    .catch(() => {
-      if (projectGrid) projectGrid.innerHTML = `<div class="loading-card">${currentLang === 'de' ? 'Repositories konnten nicht geladen werden.' : 'Repositories could not be loaded.'}</div>`;
-    });
-
-  const articleGrid = document.querySelector('[data-article-grid]');
   function renderArticles(posts) {
     if (!articleGrid || !posts.length) return;
     articleGrid.innerHTML = posts.slice(0, 6).map(post => {
@@ -139,6 +124,16 @@
       </a>`;
     }).join('');
   }
+
+  fetch('https://api.github.com/users/sandrobreu/repos?sort=updated&per_page=12')
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(repos => {
+      window.__projects = repos.filter(repo => !repo.fork).slice(0, 6);
+      renderProjects(window.__projects);
+    })
+    .catch(() => {
+      if (projectGrid) projectGrid.innerHTML = `<div class="loading-card">${currentLang === 'de' ? 'Repositories konnten nicht geladen werden.' : 'Repositories could not be loaded.'}</div>`;
+    });
 
   fetch('/data/newsletter.json')
     .then(r => r.ok ? r.json() : Promise.reject())
