@@ -237,6 +237,25 @@ button { color: inherit; }
     justify-content: center;
     text-align: center;
   }
+  .contact-card {
+    background: rgba(17,24,33,.96);
+    border-color: rgba(255,255,255,.20);
+    box-shadow: 0 18px 48px rgba(0,0,0,.30);
+  }
+  .contact-card label {
+    color: #dce3ea;
+  }
+  .contact-card input,
+  .contact-card textarea {
+    background: rgba(255,255,255,.075);
+    border-color: rgba(255,255,255,.22);
+  }
+  .contact-card input:focus,
+  .contact-card textarea:focus {
+    border-color: rgba(115,224,255,.9);
+    box-shadow: 0 0 0 3px rgba(115,224,255,.13);
+    background: rgba(255,255,255,.095);
+  }
   .focus-grid, .skills-grid, .project-grid, .article-grid { grid-template-columns: 1fr; }
   .timeline-item { grid-template-columns: 1fr; gap: 8px; }
   .language-switch { margin-left: auto; }
