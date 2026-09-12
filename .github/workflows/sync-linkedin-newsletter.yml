@@ -3,7 +3,7 @@ name: Sync LinkedIn newsletter
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17 */6 * * *"
+    - cron: "17 6 */2 * *"
 
 permissions:
   contents: write
