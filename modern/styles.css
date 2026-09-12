@@ -212,9 +212,11 @@ button { color: inherit; }
   .section { padding: 82px 0; }
   .nav-shell { min-height: 68px; }
   .brand-copy { display: none; }
-  .hero-content { padding-top: 120px; padding-bottom: 70px; gap: 46px; }
+  .hero-content { padding-top: 120px; padding-bottom: 70px; gap: 42px; }
   .hero h1 { font-size: clamp(3.5rem, 20vw, 5.5rem); }
-  .hero-portrait { max-width: 280px; }
+  .hero-portrait { width: min(72vw, 240px); max-width: 240px; }
+  .portrait-ring { padding: 8px; border-radius: 26px; }
+  .portrait-ring img { aspect-ratio: 4 / 3; border-radius: 18px; object-position: center 28%; }
   .focus-grid, .skills-grid, .project-grid, .article-grid { grid-template-columns: 1fr; }
   .timeline-item { grid-template-columns: 1fr; gap: 8px; }
   .language-switch { margin-left: auto; }
