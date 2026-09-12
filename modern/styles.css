@@ -179,8 +179,26 @@ button { color: inherit; }
   .menu-button { display: block; }
   .brand { min-width: 0; }
   .brand-copy small { display: none; }
-  .mobile-nav { display: grid; grid-template-rows: 0fr; overflow: hidden; width: var(--shell); margin: 0 auto; transition: grid-template-rows .25s ease, padding .25s ease; }
-  .mobile-nav.open { grid-template-rows: 1fr; padding: 0 0 18px; }
+  .mobile-nav {
+    display: block;
+    width: var(--shell);
+    max-height: 0;
+    margin: 0 auto;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: max-height .28s ease, opacity .2s ease, padding .28s ease, visibility 0s linear .28s;
+  }
+  .mobile-nav.open {
+    max-height: 360px;
+    padding: 0 0 18px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: max-height .28s ease, opacity .2s ease, padding .28s ease, visibility 0s;
+  }
   .mobile-nav a { display: block; padding: 10px 0; color: var(--muted); }
   .hero-content, .about-layout, .timeline-grid, .contact-layout { grid-template-columns: 1fr; }
   .hero-portrait { justify-self: start; max-width: 340px; }
