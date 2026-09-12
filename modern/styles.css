@@ -157,6 +157,8 @@ button { color: inherit; }
 .contact-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 70px; }
 .contact-links { display: flex; gap: 20px; color: var(--muted); margin-top: 24px; }
 .contact-card { padding: 28px; display: grid; gap: 16px; }
+.contact-profile p { margin: 0; color: var(--muted); }
+.contact-links-large { margin-top: 8px; flex-wrap: wrap; }
 .contact-card label { display: grid; gap: 7px; color: var(--muted); font-size: .82rem; }
 .contact-card input, .contact-card textarea { width: 100%; border: 1px solid var(--line); background: rgba(255,255,255,.035); color: var(--text); border-radius: 12px; padding: 12px 13px; outline: none; resize: vertical; }
 .contact-card input:focus, .contact-card textarea:focus { border-color: rgba(115,224,255,.65); box-shadow: 0 0 0 3px rgba(115,224,255,.08); }
@@ -164,14 +166,12 @@ button { color: inherit; }
 .footer-content { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .footer-content a:hover { color: var(--text); }
 
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
-.reveal-delay { transition-delay: .1s; }
-.reveal.visible { opacity: 1; transform: none; }
+/* Content must never depend on JavaScript for visibility. */
+.reveal, .reveal.visible { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
   .hero-video { display: none; }
-  .reveal { opacity: 1; transform: none; }
 }
 
 @media (max-width: 980px) {
@@ -194,13 +194,11 @@ button { color: inherit; }
   .section { padding: 82px 0; }
   .nav-shell { min-height: 68px; }
   .brand-copy { display: none; }
-  .language-switch { font-size: .74rem; }
-  .hero-content { gap: 46px; padding-top: 120px; }
-  .hero h1 { font-size: clamp(3.5rem, 18vw, 5.8rem); }
-  .hero-actions { align-items: stretch; }
-  .button { width: 100%; }
+  .hero-content { padding-top: 120px; padding-bottom: 70px; gap: 46px; }
+  .hero h1 { font-size: clamp(3.5rem, 20vw, 5.5rem); }
+  .hero-portrait { max-width: 280px; }
   .focus-grid, .skills-grid, .project-grid, .article-grid { grid-template-columns: 1fr; }
   .timeline-item { grid-template-columns: 1fr; gap: 8px; }
-  .focus-card { min-height: 190px; }
-  .footer-content { align-items: flex-start; flex-direction: column; justify-content: center; padding: 20px 0; }
+  .language-switch { margin-left: auto; }
+  .footer-content { padding: 20px 0; align-items: flex-start; flex-direction: column; }
 }
