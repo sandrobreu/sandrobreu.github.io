@@ -22,8 +22,9 @@
       'skills.eyebrow': 'Capabilities', 'skills.title': 'Skills',
       'projects.title': 'Projects', 'projects.intro': 'Selected recent public repositories across data engineering, machine learning and technology.', 'projects.loading': 'Loading repositories…', 'projects.all': 'View all repositories ↗',
       'blog.eyebrow': 'Writing', 'blog.title': 'Blog', 'blog.intro': 'Recent articles on data, AI and technology.', 'blog.loading': 'Loading articles…', 'blog.all': 'View all articles ↗',
-      'contact.eyebrow': 'Get in touch', 'contact.title': 'Contact', 'contact.intro': 'For professional exchange, collaboration or consulting enquiries, feel free to get in touch.', 'contact.name': 'Name', 'contact.email': 'Email', 'contact.subject': 'Subject', 'contact.message': 'Message', 'contact.send': 'Send message',
-      'footer.classic': 'View current / classic version'
+      'contact.eyebrow': 'Get in touch', 'contact.title': 'Contact', 'contact.intro': 'For professional exchange, collaboration or consulting enquiries, feel free to get in touch.',
+      'contact.profile': 'The easiest way to reach me is via LinkedIn. You can also explore my public work on GitHub.',
+      'footer.top': 'Back to top ↑'
     },
     de: {
       'nav.about': 'Über mich', 'nav.experience': 'Erfahrung', 'nav.skills': 'Skills', 'nav.projects': 'Projekte', 'nav.blog': 'Blog', 'nav.contact': 'Kontakt',
@@ -45,8 +46,9 @@
       'skills.eyebrow': 'Kompetenzen', 'skills.title': 'Skills',
       'projects.title': 'Projekte', 'projects.intro': 'Ausgewählte aktuelle öffentliche Repositories aus Data Engineering, Machine Learning und Technologie.', 'projects.loading': 'Repositories werden geladen…', 'projects.all': 'Alle Repositories ansehen ↗',
       'blog.eyebrow': 'Beiträge', 'blog.title': 'Blog', 'blog.intro': 'Aktuelle Beiträge zu Data, AI und Technology.', 'blog.loading': 'Beiträge werden geladen…', 'blog.all': 'Alle Beiträge ansehen ↗',
-      'contact.eyebrow': 'Kontakt', 'contact.title': 'Kontakt', 'contact.intro': 'Für fachlichen Austausch, Zusammenarbeit oder Consulting-Anfragen kannst du mich gerne kontaktieren.', 'contact.name': 'Name', 'contact.email': 'E-Mail', 'contact.subject': 'Betreff', 'contact.message': 'Nachricht', 'contact.send': 'Nachricht senden',
-      'footer.classic': 'Aktuelle / klassische Version ansehen'
+      'contact.eyebrow': 'Kontakt', 'contact.title': 'Kontakt', 'contact.intro': 'Für fachlichen Austausch, Zusammenarbeit oder Consulting-Anfragen kannst du mich gerne kontaktieren.',
+      'contact.profile': 'Am einfachsten erreichst du mich über LinkedIn. Meine öffentlichen Projekte findest du zusätzlich auf GitHub.',
+      'footer.top': 'Nach oben ↑'
     }
   };
 
@@ -61,7 +63,11 @@
       const value = translations[currentLang][el.dataset.i18n];
       if (value) el.textContent = value;
     });
-    document.querySelectorAll('[data-language]').forEach(button => button.classList.toggle('active', button.dataset.language === currentLang));
+    document.querySelectorAll('[data-language]').forEach(button => {
+      const active = button.dataset.language === currentLang;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
     renderProjects(window.__projects || []);
     renderArticles(window.__articles || []);
   }
@@ -85,22 +91,27 @@
     menuButton.setAttribute('aria-expanded', 'false');
   }));
 
-  document.querySelector('[data-current-year]').textContent = new Date().getFullYear();
+  const currentYear = document.querySelector('[data-current-year]');
+  if (currentYear) currentYear.textContent = new Date().getFullYear();
 
-  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  }), { threshold: .14 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    }), { threshold: .14 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
 
   const projectGrid = document.querySelector('[data-project-grid]');
   function renderProjects(repos) {
     if (!projectGrid || !repos.length) return;
     projectGrid.innerHTML = repos.map(repo => `
-      <a class="project-card reveal visible" href="${repo.html_url}" target="_blank" rel="noopener noreferrer">
-        <div class="card-meta"><span>${repo.language || 'Code'}</span><span>★ ${repo.stargazers_count}</span></div>
+      <a class="project-card reveal visible" href="${escapeAttr(repo.html_url)}" target="_blank" rel="noopener noreferrer">
+        <div class="card-meta"><span>${escapeHtml(repo.language || 'Code')}</span><span>★ ${Number(repo.stargazers_count || 0)}</span></div>
         <h3>${escapeHtml(repo.name)}</h3>
         <p>${escapeHtml(repo.description || (currentLang === 'de' ? 'Öffentliches GitHub-Repository.' : 'Public GitHub repository.'))}</p>
         <span class="card-link">GitHub ↗</span>
@@ -123,13 +134,13 @@
     articleGrid.innerHTML = posts.slice(0, 6).map(post => {
       const date = new Date(`${post.published}T12:00:00`).toLocaleDateString(currentLang === 'de' ? 'de-CH' : 'en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
       return `<a class="article-card reveal visible" href="${escapeAttr(post.url)}" target="_blank" rel="noopener noreferrer">
-        <img src="../${escapeAttr(post.image || 'img/linkedin_2.png')}" alt="${escapeAttr(post.title)}" loading="lazy">
+        <img src="/${escapeAttr(post.image || 'img/linkedin_2.png')}" alt="${escapeAttr(post.title)}" loading="lazy">
         <div class="article-body"><div class="card-meta"><span>${date}</span><span>LinkedIn ↗</span></div><h3>${escapeHtml(post.title)}</h3><span class="card-link">${currentLang === 'de' ? 'Beitrag lesen ↗' : 'Read article ↗'}</span></div>
       </a>`;
     }).join('');
   }
 
-  fetch('../data/newsletter.json')
+  fetch('/data/newsletter.json')
     .then(r => r.ok ? r.json() : Promise.reject())
     .then(posts => {
       window.__articles = posts.filter(p => p && p.title && p.url && p.published).sort((a,b) => new Date(b.published) - new Date(a.published));
