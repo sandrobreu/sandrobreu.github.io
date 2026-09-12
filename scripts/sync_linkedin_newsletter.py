@@ -4,7 +4,6 @@ import hashlib
 import json
 import os
 import re
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 from urllib.parse import urljoin, urlparse
@@ -68,7 +67,6 @@ def discover_article_urls(page: Page) -> list[str]:
 
     page.wait_for_timeout(3_000)
 
-    # Trigger lazy loading of the latest/past editions.
     for _ in range(5):
         page.evaluate("window.scrollBy(0, Math.max(window.innerHeight * 1.5, 1200))")
         page.wait_for_timeout(900)
@@ -78,8 +76,6 @@ def discover_article_urls(page: Page) -> list[str]:
         "els => els.map(a => a.href).filter(Boolean)",
     )
 
-    # LinkedIn occasionally embeds article URLs in hydration JSON rather than
-    # exposing all of them as rendered anchors, so also inspect the HTML.
     html = page.content().replace("\\u002F", "/").replace("\\/", "/")
     embedded = re.findall(
         r"https?://(?:www\.)?linkedin\.com/pulse/[^\"'<>\\s]+",
@@ -193,7 +189,6 @@ def published_date(page: Page, previous: dict[str, Any] | None) -> str | None:
     except Exception:
         pass
 
-    # Public LinkedIn articles usually render a line like "Published Sep 11, 2026".
     try:
         body_text = page.locator("body").inner_text(timeout=5_000)
         match = re.search(
@@ -257,10 +252,27 @@ def local_cover_path(article_url: str, image_url: str, previous_image: str | Non
         print(f"Saved cover: {destination}")
         return destination.as_posix()
     except Exception as exc:
-        # The browser can usually display media.licdn.com directly even when a
-        # datacenter request is temporarily rejected, so retain the source URL.
         print(f"Could not cache cover for {article_url}: {exc}")
         return image_url
+
+
+def previous_post_fallback(article_url: str, previous: dict[str, Any] | None) -> dict[str, str] | None:
+    if not previous:
+        return None
+
+    title = clean_title(str(previous.get("title", "")))
+    published = parse_date(str(previous.get("published", "")))
+    image = str(previous.get("image", "")).strip()
+    if not title or not published or not image:
+        return None
+
+    print(f"Using cached metadata for rate-limited article: {article_url}")
+    return {
+        "title": title,
+        "published": published,
+        "url": article_url,
+        "image": image,
+    }
 
 
 def scrape_article(
@@ -273,6 +285,8 @@ def scrape_article(
         response = page.goto(article_url, wait_until="domcontentloaded", timeout=60_000)
         if response:
             print(f"Article HTTP {response.status}: {article_url}")
+            if response.status == 429:
+                return previous_post_fallback(article_url, previous)
         page.wait_for_timeout(1_500)
 
         title = clean_title(
@@ -300,6 +314,9 @@ def scrape_article(
         published = published_date(page, previous)
 
         if not title or not image_url or not published:
+            fallback = previous_post_fallback(article_url, previous)
+            if fallback:
+                return fallback
             print(
                 "Skipping incomplete article metadata:",
                 {"url": article_url, "title": bool(title), "image": bool(image_url), "published": published},
@@ -315,6 +332,9 @@ def scrape_article(
             "image": image,
         }
     except Exception as exc:
+        fallback = previous_post_fallback(article_url, previous)
+        if fallback:
+            return fallback
         print(f"Failed to scrape article {article_url}: {exc}")
         return None
     finally:
