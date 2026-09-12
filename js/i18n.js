@@ -177,7 +177,20 @@
     document.dispatchEvent(new CustomEvent('siteLanguageChanged', { detail: { lang: activeLanguage } }));
   }
 
+  function removeEmptyAboutCarousel() {
+    const carousel = document.querySelector('section[data-id="about-me"] .testimonials.owl-carousel');
+    if (!carousel) return;
+    const meaningfulContent = carousel.querySelector('.testimonial, article, blockquote, img, a');
+    if (!meaningfulContent) {
+      const row = carousel.closest('.row');
+      if (row) row.remove();
+      else carousel.remove();
+    }
+  }
+
   function setup() {
+    removeEmptyAboutCarousel();
+
     const stored = localStorage.getItem('siteLanguage');
     const browserLanguage = (navigator.language || '').toLowerCase().startsWith('de') ? 'de' : 'en';
     const initialLanguage = stored || browserLanguage;
