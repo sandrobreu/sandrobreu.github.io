@@ -151,6 +151,73 @@
             }
         }
 
+        // Weekly Bytes: keep the blog section data-driven and always show the six newest editions.
+        var newsletterPage = 'https://www.linkedin.com/newsletters/7113976045355048961/';
+        var $blogSection = $('section[data-id="blog"]');
+        var $blogContainer = $blogSection.find('.blog-masonry');
+
+        $blogSection.find('.page-title h2').html('Weekly <span>Bytes</span>');
+        $blogSection.find('.col-xs-12.col-sm-12 > p').first().html('Die sechs neuesten Ausgaben meines LinkedIn-Newsletters <strong>Weekly Bytes</strong> – rund um Data, AI, Technology und eigene Projekte.');
+        $blogSection.find('a.btn.btn-primary').attr('href', newsletterPage).text('Alle Weekly Bytes auf LinkedIn ansehen');
+
+        $.getJSON('data/newsletter.json')
+            .done(function(posts) {
+                var latestPosts = posts
+                    .filter(function(post) {
+                        return post && post.title && post.published && post.url;
+                    })
+                    .sort(function(a, b) {
+                        return new Date(b.published) - new Date(a.published);
+                    })
+                    .slice(0, 6);
+
+                if (!latestPosts.length) {
+                    return;
+                }
+
+                $blogContainer.empty();
+
+                latestPosts.forEach(function(post, index) {
+                    var date = new Date(post.published + 'T12:00:00');
+                    var formattedDate = date.toLocaleDateString('de-CH', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                    });
+                    var image = post.image || 'img/linkedin_2.png';
+                    var safeTitle = $('<div>').text(post.title).html();
+                    var safeUrl = $('<div>').text(post.url).html();
+                    var safeImage = $('<div>').text(image).html();
+
+                    $blogContainer.append(`
+                        <div class="item post-${index + 1}">
+                          <div class="blog-card">
+                            <div class="media-block">
+                              <div class="category"><a href="${newsletterPage}" target="_blank" rel="noopener noreferrer" title="LinkedIn Newsletter">Weekly Bytes</a></div>
+                              <a href="${safeUrl}" target="_blank" rel="noopener noreferrer">
+                                <img src="${safeImage}" class="size-blog-masonry-image-two-c" alt="${safeTitle}" onerror="this.onerror=null;this.src='img/linkedin_2.png';" />
+                                <div class="mask"></div>
+                              </a>
+                            </div>
+                            <div class="post-info">
+                              <span class="item-date">${formattedDate}</span>
+                              <a href="${safeUrl}" target="_blank" rel="noopener noreferrer"><h4 class="blog-item-title">${safeTitle}</h4></a>
+                            </div>
+                          </div>
+                        </div>
+                    `);
+                });
+
+                $blogContainer.imagesLoaded(function() {
+                    if ($blogContainer.data('masonry')) {
+                        $blogContainer.masonry('reloadItems');
+                        $blogContainer.masonry('layout');
+                    } else {
+                        $blogContainer.masonry();
+                    }
+                });
+            });
+
         var movementStrength = 23;
         var height = movementStrength / $(document).height();
         var width = movementStrength / $(document).width();
@@ -274,7 +341,7 @@
                 $(this).parent('.form-group').addClass('form-group-focus');
             })
             .on("focusout", function(){
-                if($(this).val().length === 0) {
+                if ($(this).val().length === 0) {
                     $(this).parent('.form-group').removeClass('form-group-focus');
                 }
             });
@@ -286,7 +353,7 @@
             removalDelay: 300,
 
             // Class that is added to popup wrapper and background
-            // make it unique to apply your CSS animations just to this exact popup
+            // make it unique to apply your CSS animations to just this exact popup
             mainClass: 'mfp-fade',
             image: {
                 // options for image content type
@@ -301,7 +368,7 @@
                         '<div class="mfp-close"></div>'+
                         '<iframe class="mfp-iframe" frameborder="0" allowfullscreen></iframe>'+
                         '<div class="mfp-title mfp-bottom-iframe-title"></div>'+
-                      '</div>', // HTML markup of popup, `mfp-close` will be replaced by the close button
+                      '</div>', // HTML markup of popup, `mfp-close` will be replaced by mfp-close button
 
                 patterns: {
                     youtube: {
@@ -310,7 +377,7 @@
                       id: null, // String that splits URL in a two parts, second part should be %id%
                       // Or null - full URL will be returned
                       // Or a function that should return %id%, for example:
-                      // id: function(url) { return 'parsed id'; }
+                      // id: function(url) { return 'parsed id';
 
                       src: '%id%?autoplay=1' // URL that will be set as a source for iframe.
                     },
